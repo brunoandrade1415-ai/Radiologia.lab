@@ -1,4 +1,4 @@
-# Radiologia.labimport streamlit as st
+import streamlit as st
 
 # Configuração da página
 st.set_page_config(
@@ -82,9 +82,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ---------------------------------------------------------
 # HOMENAGEM & MEMORANDO DE CO-CRIAÇÃO
-# ---------------------------------------------------------
 st.markdown("""
 <div class="memo-card">
     <span style="background-color: #388bfd; color: #fff; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;">
@@ -92,7 +90,7 @@ st.markdown("""
     </span>
     <h2 style="margin-top: 10px; margin-bottom: 5px; color: #ffffff !important;">Plataforma RadioLab - Guia Interativo de Radiologia</h2>
     <p style="font-size: 1.15rem; color: #8b949e; margin-bottom: 0px;">
-        Idealizado e construído por <strong>Bruno Andrade</strong> (Radiologia - Colégio Lumen - Leme/SP) em colaboração com o assistente IA. Um ambiente dinâmico, visual e moderno focado em simplificar o estudo radiológico sem enrolação!
+        Idealizado e construído por <strong>Bruno Andrade</strong> em colaboração com o assistente IA. Um ambiente dinâmico, visual e moderno focado em simplificar o estudo radiológico sem enrolação!
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -106,9 +104,7 @@ tab_patologias, tab_calc, tab_quiz, tab_socorros, tab_galeria = st.tabs([
     "🖼️ 5. Galeria de Exames"
 ])
 
-# ---------------------------------------------------------
 # ABA 1: FRATURAS, ANATÔMICOS E BIZUS VISUAL
-# ---------------------------------------------------------
 with tab_patologias:
     st.header("🦴 Guia Visual: Fraturas, Lesões & Bizus")
     st.write("Conecte a anatomia com as imagens e pegue o traço radiolúcido sem vacilar!")
@@ -138,9 +134,7 @@ with tab_patologias:
     with b2:
         st.success("🖐️ **Mão Perfil:** Posição em 'leque' com os dedos separados pra não virar uma bagunça de metacarpais sobrepostos.")
 
-# ---------------------------------------------------------
 # ABA 2: CALCULADORA DE TÉCNICA (KV / MAS)
-# ---------------------------------------------------------
 with tab_calc:
     st.header("⚡ Raio-X Tech: Calculadora de KV e mAs")
     st.write("Sem adivinhação! Ajuste os sliders de acordo com o paciente e pegue a dose certa.")
@@ -168,9 +162,7 @@ with tab_calc:
         
         st.progress(min(int(kv_calculado), 100) / 100)
 
-# ---------------------------------------------------------
 # ABA 3: GAME QUIZ RAD (1 PERGUNTA POR TELA)
-# ---------------------------------------------------------
 with tab_quiz:
     st.header("🎯 Game Quiz Rad")
     st.write("Testando sua visão de raio-x! Responda uma pergunta por vez.")
@@ -243,9 +235,7 @@ with tab_quiz:
             st.session_state.score = 0
             st.rerun()
 
-# ---------------------------------------------------------
 # ABA 4: QUIZ PRIMEIROS SOCORROS (1 PERGUNTA POR TELA)
-# ---------------------------------------------------------
 with tab_socorros:
     st.header("🚑 Quiz de Primeiros Socorros na Radiologia")
     st.write("Saber agir rápido na sala de exames salva vidas!")
@@ -318,9 +308,7 @@ with tab_socorros:
             st.session_state.soc_score = 0
             st.rerun()
 
-# ---------------------------------------------------------
 # ABA 5: GALERIA DE EXAMES
-# ---------------------------------------------------------
 with tab_galeria:
     st.header("🖼️ Galeria Visual de Referência")
     st.write("Acervo de exames radiográficos para consulta rápida.")
