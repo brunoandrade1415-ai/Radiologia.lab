@@ -1,3 +1,10 @@
+import streamlit as st
+
+# Configura o Streamlit para usar a tela inteira
+st.set_page_config(page_title="RadioLingo", layout="wide")
+
+# O seu código HTML/CSS/JS entra como uma string simples
+html_code = """
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -39,9 +46,9 @@
             border: 2px solid var(--gray);
             padding: 24px;
             box-shadow: 0 4px 0 var(--gray);
+            margin: 20px auto;
         }
 
-        /* Top Bar */
         .top-bar {
             display: flex;
             align-items: center;
@@ -76,7 +83,6 @@
             gap: 4px;
         }
 
-        /* Question Section */
         .question-title {
             font-size: 1.25rem;
             margin-bottom: 16px;
@@ -128,7 +134,6 @@
             color: #0077b6;
         }
 
-        /* Action / Footer */
         .action-btn {
             width: 100%;
             background-color: var(--green);
@@ -148,7 +153,6 @@
             border-bottom-width: 2px;
         }
 
-        /* Feedback Panel */
         .feedback-panel {
             margin-top: 16px;
             padding: 16px;
@@ -178,7 +182,6 @@
 <body>
 
 <div class="quiz-container">
-    <!-- Barra Superior -->
     <div class="top-bar">
         <div class="progress-bar-bg">
             <div class="progress-bar-fill" id="progress"></div>
@@ -189,17 +192,12 @@
         </div>
     </div>
 
-    <!-- Conteúdo da Questão -->
     <div id="quiz-body">
         <h2 class="question-title" id="question-text">Carregando questão...</h2>
         
-        <div class="illustration-box" id="illustration-container">
-            <!-- Renderização do SVG Interativo -->
-        </div>
+        <div class="illustration-box" id="illustration-container"></div>
 
-        <div class="options-grid" id="options-container">
-            <!-- Botões das opções via JS -->
-        </div>
+        <div class="options-grid" id="options-container"></div>
 
         <button class="action-btn" id="check-btn" onclick="checkAnswer()">Verificar</button>
 
@@ -211,7 +209,6 @@
 </div>
 
 <script>
-    // Banco de Dados de Questões (Extraído da nossa estrutura)
     const questions = [
         {
             id: 1,
@@ -224,7 +221,7 @@
                   </svg>`,
             options: ["Epífise", "Canal Medular", "Periósteo", "Cartilagem Articular"],
             answer: 2,
-            explanation: "O periósteo reveste a diáfise e é vital para a nutrição e regeneração do osso[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span)."
+            explanation: "O periósteo reveste a diáfise e é vital para a nutrição e regeneração do osso."
         },
         {
             id: 2,
@@ -237,7 +234,7 @@
                   </svg>`,
             options: ["Na articulação do punho", "Na cabeça do 3º metacarpo", "No osso trapezoide", "Na falange distal"],
             answer: 1,
-            explanation: "O Raio Central incide perpendicularmente na 3ª articulação metacarpofalângica[span_2](start_span)[span_2](end_span)."
+            explanation: "O Raio Central incide perpendicularmente na 3ª articulação metacarpofalângica."
         },
         {
             id: 3,
@@ -249,7 +246,7 @@
                   </svg>`,
             options: ["Perpendicular (0°)", "15° Caudal", "40° Cranial", "10° Cranial"],
             answer: 2,
-            explanation: "A incidência exige 40° de angulação cranial em direção à base do primeiro metatarso[span_3](start_span)[span_3](end_span)."
+            explanation: "A incidência exige 40° de angulação cranial em direção à base do primeiro metatarso."
         }
     ];
 
@@ -259,7 +256,6 @@
     let xp = 0;
     let isChecked = false;
 
-    // Inicializar App
     function loadQuestion() {
         isChecked = false;
         selectedOption = null;
@@ -279,12 +275,10 @@
             optionsGrid.appendChild(btn);
         });
 
-        // Reset UI
         document.getElementById("feedback").className = "feedback-panel";
         document.getElementById("feedback").style.display = "none";
         document.getElementById("check-btn").innerText = "Verificar";
         
-        // Progresso
         const progressPct = ((currentIdx) / questions.length) * 100;
         document.getElementById("progress").style.width = `${progressPct}%`;
     }
@@ -299,7 +293,6 @@
 
     function checkAnswer() {
         if (isChecked) {
-            // Avançar para a próxima questão
             currentIdx++;
             if (currentIdx < questions.length) {
                 loadQuestion();
@@ -324,14 +317,12 @@
         const feedbackText = document.getElementById("feedback-text");
 
         if (selectedOption === q.answer) {
-            // Resposta Correta
             feedbackEl.className = "feedback-panel correct";
             feedbackTitle.innerText = "Excelente!";
             feedbackText.innerText = q.explanation;
             xp += 10;
             document.getElementById("xp").innerText = xp;
         } else {
-            // Resposta Incorreta
             feedbackEl.className = "feedback-panel incorrect";
             feedbackTitle.innerText = "Solução correta:";
             feedbackText.innerText = `${q.options[q.answer]} - ${q.explanation}`;
@@ -354,9 +345,12 @@
         document.getElementById("check-btn").innerText = "Continuar";
     }
 
-    // Carregar primeira questão ao abrir
     loadQuestion();
 </script>
 
 </body>
 </html>
+"""
+
+# Renderiza o HTML dentro da aplicação Streamlit
+st.components.v1.html(html_code, height=800, scrolling=True)
